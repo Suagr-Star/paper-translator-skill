@@ -1,0 +1,6 @@
+[1] N. S. Schutte, J. M. Malouff, C. Bobik, T. D. Coston, C. Greeson, C. Jedlicka, E. Rhodes, and G. Wendorf, "Emotional intelligence and interpersonal relations," The Journal of Social Psychology, vol. 141, no. 4, pp. 523-536, 2001.
+[2] S. Zhao, X. Yao, J. Yang, G. Jia, G. Ding, T. Chua, B. W. Schuller, and K. Keutzer, "Affective image content analysis: Two decades review and new perspectives," IEEE Trans. Pattern Anal. Mach. Intell., vol. 44, no. 10, pp. 6729-6751, 2022.
+[3] H. Zhang, D. Wu, Y. Li, K. Liu, Y. Wang, Y. Zhou, and S. Zhao, "Multimodal emotion recognition with large language models," arXiv preprint arXiv:2605.21239, 2026.
+[4] W. Dai, J. Li, D. Li, A. M. H. Tiong, J. Zhao et al., "Instructblip: Towards general-purpose vision-language models with instruction tuning," in NeurIPS, 2023.
+[5] M. Minsky, Society of Mind. Simon and Schuster, 1986.
+(...共 86 条, 每行一条)

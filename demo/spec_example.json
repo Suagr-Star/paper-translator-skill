@@ -1,0 +1,119 @@
+{
+ "meta": {
+  "title_zh": "MVEI 与 EmObserver：基于情绪陈述判断，赋能面向多模态大模型的视觉情感智能",
+  "title_en": "MVEI & EmObserver: Empowering MLLM-Oriented Visual Emotional Intelligence via Emotion Statement Judgement",
+  "authors": "Daiqing Wu, Dongbao Yang, Jiashu Yao, Hongrui Zhang, Can Ma, Yu Zhou, Sicheng Zhao（清华大学、南开大学、北京理工大学、中国科学院信息工程研究所）",
+  "venue": "期刊投稿预印本（IEEE 期刊格式，arXiv:2607.21061）；会议版发表于 ICLR 2026",
+  "tier": "会议版：ICLR 2026（国际学习表征会议，深度学习三大顶会之一，清华大学 A 类推荐国际会议；中国计算机学会 CCF 未收录目录）；期刊扩展版暂为预印本",
+  "pub_date": "arXiv 预印本 2026 年 7 月 23 日；会议版 ICLR 2026",
+  "doi": "10.48550/arXiv.2607.21061（代码：github.com/wdqqdw/EmObserver）",
+  "translated_note": "AI 翻译归档；正文图表取自原文高清裁剪，公式与参考文献保留原文，正文引用编号与原文一致",
+  "key_problem": "现有情感图像内容分析（AICA）范式与多模态大语言模型（MLLM）开放式、指令驱动的特性存在结构性错配：固定的标签空间遗漏合理答案、情绪分类体系粗粒度、忽视场景情境与观看者差异等上下文因素、人工标注成本高昂。其后果是新发布的 MLLM 普遍缺乏对「视觉情感智能」的系统性评估，领域内也缺少与之匹配的高效监督与优化手段。",
+  "key_innovations": [
+   "提出情绪陈述判断（ESJ）任务：将 AICA 重构为「陈述验证」问题，输入保留自然语言情感描述的表达力（覆盖细粒度情绪与情境因素），输出约束为可判定的「正确/不正确」，一次化解遗漏合理答案、分类体系受限、忽视情境与标注昂贵四大局限；",
+   "设计 INSETS 自动标注流水线并构建 INSETS-462k 语料：多个 MLLM 协同提取开放词表情绪、锚定 Parrott 层级模型并共识投票，自动生成 46.2 万条覆盖情感极性/情绪解读/场景情境/感知主观性四维度的情绪陈述，人工介入仅约 15+100 小时；",
+   "经人工精修策展出 MVEI 基准：3,086 对严格核验的图像-陈述样本（五人标注、Fleiss’ kappa 0.61），填补 MLLM 视觉情感智能缺乏可靠评测标准的空白；",
+   "提出情感导向模型 EmObserver：冷启动初始化→GRPO 采样锐化→错误引导在线策略自蒸馏（OPSD）→分析强化的四阶段训练配方，8B 模型在 MVEI 达 86.23% 总准确率、超越 78B 级与专有模型，并泛化到 EEmo-Bench 与 VECBench；",
+   "开展覆盖 24 个开源、4 个专有、4 个情感导向 MLLM 的大规模实证：揭示视觉情感智能不随规模/新旧稳定提升的分化现状、错误类型分布与训练配方消融，为后续研究建立参考基准与强基线。"
+  ]
+ },
+ "blocks": [
+  {
+   "type": "h1",
+   "text": "摘要"
+  },
+  {
+   "type": "p",
+   "text": "情感图像内容分析（Affective Image Content Analysis, AICA）旨在识别并理解视觉内容所引发的情绪，是迈向通用人工智能（AGI）不可或缺的一步。然而，尽管多模态大语言模型（Multimodal Large Language Models, MLLMs）进展迅猛，近期发布的新模型却大多缺乏对其视觉情感智能的系统性评估。我们将这一缺口归因于传统 AICA 范式与 MLLM 开放式、指令驱动的特性之间存在结构性错配，进一步分析可归纳出四大局限：遗漏合理答案、情绪分类体系受限、忽视情境因素，以及标注成本高昂。为突破这些障碍，我们提出情绪陈述判断（Emotion Statement Judgement, ESJ）任务——一种「陈述验证」式的问题形式：既保留输入空间的表达能力，又将输出约束为判别性的判断。我们进一步开发了 INSETS，一条高效的自动化标注流水线，大规模地实例化 ESJ：构建了含 46.2 万条陈述的 INSETS-462k 语料，并支撑起 MVEI——一个覆盖情感极性、情绪解读、场景情境与感知主观性四个维度、经过严格人工精修的基准。在评估之外，我们还构建了 EmObserver——一个以 ESJ 为核心目标、经多阶段精细训练优化的情感导向 MLLM。在 MVEI 上对广谱 MLLM 的大规模评测揭示了当前人工智能视觉情感智能的细粒度现状；而在多个 AICA 基准上的实验则验证了 EmObserver 的准确性、泛化性与推理忠实度。这些结果共同确立了：ESJ 是一种实用的任务形式，MVEI 是一个全面的基准，EmObserver 是一个先进的基线模型，共同推动面向 MLLM 的视觉情感智能研究。代码将发布于：https://github.com/wdqqdw/EmObserver。"
+  },
+  {
+   "type": "note",
+   "text": "索引词——视觉情感智能（Visual Emotional Intelligence）、情绪陈述判断（Emotion Statement Judgement）、情感导向多模态大语言模型（Emotion-Oriented MLLMs）。"
+  },
+  {
+   "type": "p",
+   "text": "感知、理解并回应视觉刺激中情感信号的能力，是人类情感智能的基本组成部分，支撑着健全的决策与有效的沟通 [1]。用计算手段建模这一能力的需求，催生了情感图像内容分析（AICA）——它致力于识别与理解视觉内容所引发的情绪，已成为一个重要的研究方向 [2], [3]。与此同时，多模态大语言模型（MLLMs）被日益视为通往通用人工智能（AGI）的有望路径，其在多样任务上超越人类预期的快速进步不断刷新人们的认知 [4]。然而，尽管视觉情感智能不可或缺 [5]，近期发布的 MLLM 却鲜有配套的相应评估 [6]–[8]。我们认为，这一令人费解的缺席源于：将传统 AICA 范式平滑迁移到 MLLM 上存在困难，导致该领域一直缺少一个评估和优化 MLLM 视觉情感智能的关键立足点。"
+  },
+  {
+   "type": "image",
+   "path": "figs/fig01.png",
+   "caption": "图1 主流 AICA 范式与本文提出的 ESJ 形式化对比。传统的分类与解读方法（a、b）受制于僵硬的答案空间、有限的情绪与情境覆盖以及高昂的标注成本；而由 INSETS 支撑的 ESJ（c）则可对面向 MLLM 的视觉情感智能进行定制化、可扩展的评估与优化。",
+   "width_cm": 15
+  },
+  {
+   "type": "h2",
+   "text": "A. 传统 AICA 范式"
+  },
+  {
+   "type": "table",
+   "caption": "表2 INSETS 所用 MLLM 的统计信息（**粗体**为列最大值，*斜体*为列最小值）",
+   "header": true,
+   "rows": [
+    [
+     "模型",
+     "提取情绪数",
+     "入选情绪数",
+     "生成陈述占比 (%)"
+    ],
+    [
+     "LLaVA-Next [59] 7.6B",
+     "8.3",
+     "2.4",
+     "9.8"
+    ],
+    [
+     "Mantis [60] 8.5B",
+     "**12.6**",
+     "**2.9**",
+     "**13.1**"
+    ],
+    [
+     "mPLUG-Owl3 [61] 8.1B",
+     "9.2",
+     "2.7",
+     "11.2"
+    ],
+    [
+     "Idefics3 [62] 8.5B",
+     "10.0",
+     "**2.9**",
+     "12.5"
+    ],
+    [
+     "Phi-3.5-Vision [63] 4.1B",
+     "9.9",
+     "2.8",
+     "11.7"
+    ],
+    [
+     "Qwen2-VL [64] 8.3B",
+     "8.8",
+     "2.7",
+     "10.9"
+    ],
+    [
+     "Llama-3.2-Vision [65] 10.7B",
+     "*7.2*",
+     "*2.3*",
+     "*9.3*"
+    ],
+    [
+     "Molmo [66] 8.0B",
+     "10.8",
+     "2.7",
+     "12.0"
+    ],
+    [
+     "InternVL2.5 [67] 8.3B",
+     "8.5",
+     "*2.3*",
+     "9.5"
+    ]
+   ]
+  },
+  {
+   "type": "reference",
+   "text": "[1] N. S. Schutte, J. M. Malouff, C. Bobik, T. D. Coston, C. Greeson, C. Jedlicka, E. Rhodes, and G. Wendorf, \"Emotional intelligence and interpersonal relations,\" The Journal of Social Psychology, vol. 141, no. 4, pp. 523-536, 2001."
+  }
+ ]
+}
